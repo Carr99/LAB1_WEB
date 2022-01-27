@@ -62,3 +62,16 @@ button:hover {
 #leaderbordButton:hover {
   background-color: #00739a;
 }
+
+#backButton {
+  font-size: 15px;
+  border-radius: 20px;
+  padding: 5px;
+  color: rgb(255, 255, 255);
+  background-color: crimson;
+  width: 50px;
+}
+
+#backButton:hover {
+  background-color: rgb(165, 14, 44);
+}

@@ -4,17 +4,19 @@ document.querySelector('body').addEventListener('click', function (event) {
 
   if (!aButton) { return; }
 
+  let newPage;
   let clickedButton = aButton.getAttribute('id');
   if (clickedButton === 'startButton') {
     //go to the game
   } else if (clickedButton === 'leaderbordButton') {
-    //go to leaderboard
+    newPage = '/leaderboard';
+  } else if (clickedButton === 'backButton') {
+    newPage = '/';
   }
 
-  /* this will be used when game and leaderboard is created
   event.preventDefault();
   history.pushState(null, null, newPage);
-  rotuer();*/
+  rotuer(newPage);
 });
 
 async function rotuer(aV) {
