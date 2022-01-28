@@ -14,14 +14,13 @@ body {
   background-color: rgb(235, 235, 235);
   border-radius: 10px;
   padding: 10px;
-  max-width: 650px;
-  margin: 0;
+  width: 650px;
+  max-width: 90%;
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  max-width: 650px;
   text-align: center;
 }
 

@@ -7,7 +7,7 @@ document.querySelector('body').addEventListener('click', function (event) {
   let newPage;
   let clickedButton = aButton.getAttribute('id');
   if (clickedButton === 'startButton') {
-    //go to the game
+    newPage = '/game'
   } else if (clickedButton === 'leaderbordButton') {
     newPage = '/leaderboard';
   } else if (clickedButton === 'backButton') {
@@ -30,6 +30,8 @@ async function rotuer(aV) {
   let content = await (await fetch(route)).text();
   content.includes('<title>Error</title>') && location.replace('/');
   document.querySelector('body').innerHTML = content;
+
+  route === '/partials/game.html' && loadCanvas();
 }
 
 window.addEventListener('popstate', rotuer);
