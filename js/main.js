@@ -12,6 +12,10 @@ document.querySelector('body').addEventListener('click', function (event) {
     newPage = '/leaderboard';
   } else if (clickedButton === 'backButton') {
     newPage = '/';
+    let route = location.pathname;
+    if (route.includes('game') && active) {
+      gameOver();
+    }
   }
 
   event.preventDefault();

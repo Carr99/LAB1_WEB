@@ -14,6 +14,7 @@ var trail = [];
 var size; // Start at 3
 var applePosX;
 var applePosY;
+var active = false;
 
 // (X: 0, Y: 1) = Up, (X: 0, Y: -1) = Down, (X: 1, Y: 0) = Right, (X: -1, Y: 0) = Left 
 var nextMoveX;
@@ -34,8 +35,10 @@ function start() {
   applePosX = 5;
   applePosY = 3;
   size = 3;
+  trail = [];
   //Start game and set speed
   gameControl = setInterval(gameLoop, 100);
+  active = true;
 }
 
 function gameLoop() {
@@ -46,12 +49,27 @@ function gameLoop() {
   ctx.fillStyle = 'black';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+  wallHandler();
   appleHandler();
   snakeHandler();
 
   trail.push({ x: snakeHeadPosX, y: snakeHeadPosY });
   while (trail.length > size) {
     trail.shift();
+  }
+}
+//Handling if snake touch wall
+function wallHandler() {
+  if (snakeHeadPosX >= 20) {
+    gameOver();
+  } else if (snakeHeadPosX < 0) {
+    gameOver();
+  }
+  //Check x side
+  if (snakeHeadPosY >= 20) {
+    gameOver();
+  } else if (snakeHeadPosY < 0) {
+    gameOver();
   }
 }
 
@@ -72,18 +90,24 @@ function snakeHandler() {
     ctx.shadowColor = 'limegreen';
     ctx.shadowBlur = 40;
     ctx.fillRect(trail[a].x * SIZE_20, trail[a].y * SIZE_20, SIZE_20, SIZE_20)
+
+    // Snake touch itself
+    if (snakeHeadPosX == trail[a].x && snakeHeadPosY == trail[a].y) {
+      gameOver();
+    }
   }
 }
 
 //Function for when snake touch itself or touch the wall.
 function gameOver() {
+  active = false;
   ctx.shadowColor = 'red';
   ctx.shadowBlur = 20;
   ctx.fillStyle = '#FFFFFF';
   ctx.font = '60px Georgia';
   ctx.fillText('GAME OVER', 20, 200);
   ctx.fillText('SCORE: ' + size, 20, 260);
-  clearInterval(control);
+  clearInterval(gameControl);
 }
 
 //on key pressed
@@ -107,6 +131,3 @@ document.onkeydown = function keyPressed(e) {
       break;
   }
 }
-
-// Divided the gameLoop into more function for easier navigation. 
-// It is now possible to move around the snake on the canvas with up, down, left and right key
