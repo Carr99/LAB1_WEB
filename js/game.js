@@ -19,11 +19,27 @@ var active = false;
 // (X: 0, Y: 1) = Up, (X: 0, Y: -1) = Down, (X: 1, Y: 0) = Right, (X: -1, Y: 0) = Left 
 var nextMoveX;
 var nextMoveY;
+var username;
+
+//this function loads when saveButton is pressed
+function saveUsername() {
+  if (!active) {
+    let userField = document.getElementById('username');
+
+    if (!userField.value.length == 0) {
+      username = userField.value;
+      document.getElementById("saveButton").disabled = 'true';
+      document.getElementById("username").disabled = 'true';
+      if (document.getElementById("username").disabled) {
+        start();
+      }
+    }
+  }
+}
 
 function loadCanvas() {
   canvas = document.getElementById('canvas');
   ctx = canvas.getContext('2d');
-  start();
 }
 
 function start() {
@@ -101,6 +117,8 @@ function snakeHandler() {
 //Function for when snake touch itself or touch the wall.
 function gameOver() {
   active = false;
+  document.getElementById("saveButton").removeAttribute('disabled');
+  document.getElementById("username").removeAttribute('disabled');
   ctx.shadowColor = 'red';
   ctx.shadowBlur = 20;
   ctx.fillStyle = '#FFFFFF';
@@ -129,5 +147,9 @@ document.onkeydown = function keyPressed(e) {
       nextMoveX = 0;
       nextMoveY = 1;
       break;
+    case 32:
+      if (!active) {
+        start();
+      }
   }
 }
