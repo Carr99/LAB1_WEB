@@ -15,6 +15,7 @@ var size; // Start at 3
 var applePosX;
 var applePosY;
 var active = false;
+var eat = false;
 
 // (X: 0, Y: 1) = Up, (X: 0, Y: -1) = Down, (X: 1, Y: 0) = Right, (X: -1, Y: 0) = Left 
 var nextMoveX;
@@ -52,6 +53,7 @@ function start() {
   applePosY = 3;
   size = 3;
   trail = [];
+  eat = false;
   //Start game and set speed
   gameControl = setInterval(gameLoop, 100);
   active = true;
@@ -91,6 +93,23 @@ function wallHandler() {
 
 //Handling of the apple
 function appleHandler() {
+  if (snakeHeadPosX === applePosX && snakeHeadPosY === applePosY) {
+    size++;
+    let randX = Math.floor(Math.random() * 20);
+    let randY = Math.floor(Math.random() * 20);
+    applePosX = randX;
+    applePosY = randY;
+  }
+  if (size >= BONUS && !eat) {
+    if (snakeHeadPosX === 10 && snakeHeadPosY === 5) {
+      size += 2;
+      eat = true;
+    }
+    ctx.fillStyle = 'black';
+    ctx.shadowColor = 'blue';
+    ctx.shadowBlur = 40;
+    ctx.fillRect(10 * SIZE_20, 5 * SIZE_20, SIZE_20, SIZE_20);
+  }
   ctx.fillStyle = 'black';
   ctx.strokeStyle = 'red';
   ctx.shadowColor = 'red';
@@ -153,3 +172,5 @@ document.onkeydown = function keyPressed(e) {
       }
   }
 }
+
+//eat apples and get longer + higher score
