@@ -144,6 +144,7 @@ function gameOver() {
   ctx.font = '60px Georgia';
   ctx.fillText('GAME OVER', 20, 200);
   ctx.fillText('SCORE: ' + size, 20, 260);
+  addScoreStorage();
   clearInterval(gameControl);
 }
 
@@ -173,4 +174,14 @@ document.onkeydown = function keyPressed(e) {
   }
 }
 
-//eat apples and get longer + higher score
+function addScoreStorage() {
+  let existingScores = JSON.parse(localStorage.getItem("AllScores"));
+  if (existingScores == null) existingScores = [];
+  let score = {
+    "username": username,
+    "score": size
+  };
+  localStorage.setItem("score", JSON.stringify(score));
+  existingScores.push(score);
+  localStorage.setItem("AllScores", JSON.stringify(existingScores));
+}
