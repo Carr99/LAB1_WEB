@@ -6,23 +6,21 @@ document.querySelector('body').addEventListener('click', function (event) {
 
   let newPage;
   let clickedButton = aButton.getAttribute('id');
-  if (clickedButton !== 'saveButton') {
-    if (clickedButton === 'startButton') {
-      newPage = '/game'
-    } else if (clickedButton === 'leaderbordButton') {
-      newPage = '/leaderboard';
-    } else if (clickedButton === 'backButton') {
-      newPage = '/';
-      let route = location.pathname;
-      if (route.includes('game') && active) {
-        gameOver();
-      }
+  if (clickedButton == 'saveButton') { return; }
+  if (clickedButton === 'startButton') {
+    newPage = '/game'
+  } else if (clickedButton === 'leaderbordButton') {
+    newPage = '/leaderboard';
+  } else if (clickedButton === 'backButton') {
+    newPage = '/';
+    let route = location.pathname;
+    if (route.includes('game') && active) {
+      gameOver();
     }
-
-    event.preventDefault();
-    history.pushState(null, null, newPage);
-    rotuer(newPage);
   }
+
+  event.preventDefault();
+  rotuer(newPage);
 });
 
 async function rotuer(aV) {
