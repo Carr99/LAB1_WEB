@@ -7,3 +7,16 @@
   width: 100%;
   height: auto;
 }
+
+#saveButton {
+  font-size: 15px;
+  border-radius: 20px;
+  padding: 5px;
+  color: rgb(255, 255, 255);
+  background-color: #4CAF50;
+  width: 50px;
+}
+
+#saveButton:hover {
+  background-color: #247526;
+}

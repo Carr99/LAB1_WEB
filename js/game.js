@@ -175,7 +175,7 @@ document.onkeydown = function keyPressed(e) {
 }
 
 function addScoreStorage() {
-  let existingScores = JSON.parse(localStorage.getItem("AllScores"));
+  let existingScores = JSON.parse(localStorage.getItem("allScores"));
   if (existingScores == null) existingScores = [];
   let score = {
     "username": username,
@@ -183,5 +183,5 @@ function addScoreStorage() {
   };
   localStorage.setItem("score", JSON.stringify(score));
   existingScores.push(score);
-  localStorage.setItem("AllScores", JSON.stringify(existingScores));
+  localStorage.setItem("allScores", JSON.stringify(existingScores));
 }

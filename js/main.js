@@ -11,6 +11,7 @@ document.querySelector('body').addEventListener('click', function (event) {
     newPage = '/game'
   } else if (clickedButton === 'leaderbordButton') {
     newPage = '/leaderboard';
+
   } else if (clickedButton === 'backButton') {
     newPage = '/';
     let route = location.pathname;
@@ -36,6 +37,7 @@ async function rotuer(aV) {
   document.querySelector('body').innerHTML = content;
 
   route === '/partials/game.html' && loadCanvas();
+  route === '/partials/leaderboard.html' && fillLeaderBoard();
 }
 
 window.addEventListener('popstate', rotuer);
